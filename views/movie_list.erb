@@ -1,0 +1,15 @@
+<head>
+  <title> Movie Catalog Deluxe!
+  </title>
+</head>
+
+<h1>Movies!</h1>
+
+<p>
+  <ul>
+  <% @result.each do |item| %>
+  <li><%= item["title"] %>
+  </li>
+  <% end %>
+  </ul>
+</p>

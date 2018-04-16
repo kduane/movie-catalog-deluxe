@@ -1,0 +1,29 @@
+<head>
+  <title> Movie Catalog Deluxe!
+  </title>
+</head>
+
+<h1> <%= @actor_details[0]["name"] %> </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th> Title </th>
+      <th> Character</th>
+      <!-- <th> Synopsis </th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @actor_details.each do |movie| %>
+    <tr>
+      <td>
+        <a href="/movie/<%= movie["title"]%>">
+        <%= movie["title"] %>
+        </a>
+      </td>
+      <td> <%= movie["character"] %> </td>
+      <!-- <td> <%= movie["synopsis"] %> </td> -->
+    </tr>
+    <% end %>
+  </tbody>
+</table>

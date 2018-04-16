@@ -17,7 +17,7 @@
     <% @actor_details.each do |movie| %>
     <tr>
       <td>
-        <a href="/movie/<%= movie["title"]%>">
+        <a href="/movies/<%= movie["id"]%>">
         <%= movie["title"] %>
         </a>
       </td>
@@ -27,3 +27,10 @@
     <% end %>
   </tbody>
 </table>
+
+<p>
+  Back to <a href="/actors"> actors</a>
+</p>
+<p>
+  Back to <a href="/movies"> movies</a>
+</p>

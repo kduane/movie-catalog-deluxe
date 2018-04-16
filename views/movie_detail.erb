@@ -1,0 +1,44 @@
+<head>
+  <title> Movie Catalog Deluxe!
+  </title>
+</head>
+
+<h1> <%= @movie_details[0]["title"] %> </h1>
+<p>
+  A <%= @movie_details[0]["genre"] %> by <%= @movie_details[0]["studio"]%>
+</p>
+
+<% if !@movie_details[0]["synopsis"].nil? %>
+    <p>
+      <%= @movie_details[0]["synopsis"] %>
+    </p>
+<% end %>
+
+<h2> Cast </h2>
+<table>
+  <thead>
+    <tr>
+      <th>Character </th>
+      <th>Actor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cast.each do |character| %>
+      <tr>
+        <td><%= character["character"] %></td>
+        <td>
+          <a href="/actors/<%= character["id"]%>">
+            <%= character["actor"] %>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  Back to <a href="/actors"> actors</a>
+</p>
+<p>
+  Back to <a href="/movies"> movies</a>
+</p>

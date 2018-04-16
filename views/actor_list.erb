@@ -5,14 +5,12 @@
 
 <h1>Actors </h1>
 
-<p>
-  <ul>
-  <% @actors.each do |actor| %>
-    <li>
-    <a href="/actors/<%= actor["id"]%>">
-      <%= actor["name"] %>
-    </a>
-    </li>
-  <% end %>
-  </ul>
-</p>
+<ul>
+<% @actors.each do |actor| %>
+  <li>
+  <a href="/actors/<%= actor["id"]%>">
+    <%= actor["name"] %>
+  </a>
+  </li>
+<% end %>
+</ul>

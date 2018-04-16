@@ -28,7 +28,7 @@ get '/actors' do
       'SELECT name, id FROM actors ORDER BY name'
     ).to_a
   end
-  binding.pry
+  # binding.pry
   erb :actor_list
 end
 
@@ -45,22 +45,58 @@ get '/actors/:id' do
       WHERE actor_id = #{@actor_id} "
     ).to_a
   end
-  binding.pry
+  # binding.pry
   erb :actor_detail
 end
 
 get '/movies' do
   db_connection do |conn|
-    @result = conn.exec_params(
-      'SELECT movies.title, movies.year, movies.rating, genres.name, studios.name
+    @movies = conn.exec_params(
+      'SELECT movies.title,
+        movies.year,
+        movies.rating,
+        genres.name AS genre,
+        studios.name AS studio,
+        movies.id
       FROM movies
         JOIN genres
           ON movies.genre_id = genres.id
         JOIN studios
           ON movies.studio_id = studios.id
-      ORDER BY name'
+      ORDER BY title'
     ).to_a
   end
   erb :movie_list
-#   binding.pry
+  # binding.pry
+end
+
+get '/movies/:id' do
+  @movie_id = params[:id]
+  db_connection do |conn|
+    @movie_details = conn.exec_params(
+      "SELECT movies.title,
+        genres.name AS genre,
+        studios.name AS studio,
+        movies.synopsis
+      FROM movies
+      JOIN genres
+      ON movies.genre_id = genres.id
+      JOIN studios
+      ON movies.studio_id = studios.id
+      WHERE movies.id = #{@movie_id}"
+    ).to_a
+    @cast = conn.exec_params(
+      "SELECT
+        cast_members.character,
+        actors.name AS actor,
+        actors.id
+      FROM cast_members
+      JOIN actors
+      ON cast_members.actor_id = actors.id
+      WHERE cast_members.movie_id = #{@movie_id}
+      ORDER BY character"
+    ).to_a
+  end
+  # binding.pry
+  erb :movie_detail
 end
